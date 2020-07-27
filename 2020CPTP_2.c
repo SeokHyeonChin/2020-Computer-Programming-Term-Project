@@ -7,8 +7,8 @@
 
 int sudoku_full = 0;
 
-void* find_sudoku(int a[][9], int t_sum[]);
-int check_input_valid(int sudoku[][9],int row, int col);
+void* find_sudoku(int a[][9], int t_sum[]);			// Function for return Sudoku Solution
+int check_input_valid(int sudoku[][9],int row, int col);	// Function for checking if number for box is valid
 
 
 
@@ -18,12 +18,16 @@ int main(void)
 	int sudo_board[SIZE][SIZE] = { 0 };
 	int i, j;
 
-
+	
+	/* Input is given with Trimplesum number and numbers row by row
+	   Empty box is given as 0(Zero) 				*/	
 	for (i = 0; i < SIZE; i++)
 		scanf("%d %d %d %d %d %d %d %d %d %d", &Triple_sum[i], &sudo_board[i][0], &sudo_board[i][1], &sudo_board[i][2], &sudo_board[i][3], &sudo_board[i][4], &sudo_board[i][5], &sudo_board[i][6], &sudo_board[i][7], &sudo_board[i][8]);
 	
 	int (*ptr)[SIZE] = (int(*)[SIZE])find_sudoku(sudo_board, Triple_sum);
 	
+	
+	// Print Solution
 	for (i = 0; i < SIZE; i++)
 	{
 		for (j = 0; j < SIZE; j++)
@@ -40,9 +44,9 @@ int main(void)
 
 void* find_sudoku(int a[][9], int t_sum[])
 {
-	//Sudoku with Backtracking Algorithm
+	// Sudoku with Backtracking Algorithm
 	int i, j;
-	int num;			// input number
+	int num;			// Input number
  	
 	for (i = 0; i < 9; i++) 
 	{
@@ -81,23 +85,25 @@ void* find_sudoku(int a[][9], int t_sum[])
 	return a;
 }
 
+
+
 int check_input_valid(int sudoku[][9], int row, int col)
 {
 	int i, j;
 	int box_row, box_col;
 	int check_unique = sudoku[row][col];
 
-	//Sudoku row checking
+	// Sudoku row checking
 	for (j = 0; j < 9; j++)
 		if (sudoku[row][j] == check_unique && j != col)
 			return FALSE;
 
-	//Sudoku column checking
+	// Sudoku column checking
 	for (i = 0; i < 9; i++) 
 		if (sudoku[i][col] == check_unique && i != row) 
 			return FALSE;
 
-	//Sudoku box checking
+	// Sudoku box checking
 	box_row = (row / 3) * 3;
 	box_col = (col / 3) * 3;
 	for (i = box_row; i < box_row + 3; i++)
