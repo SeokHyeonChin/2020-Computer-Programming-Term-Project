@@ -4,7 +4,7 @@
 #define TRUE 1
 #define FALSE 0
 
-int check_sudoku_valid(int a[][9]);
+int check_sudoku_valid(int a[][9]);	//Function for check if sudoku is valid
 
 int main(void)
 {
@@ -17,6 +17,7 @@ int main(void)
 	
 	solution = check_sudoku_valid(sudo_board);
 
+	//If input sudoku is valid, print true. If invalid, print false
 	if (solution == TRUE)
 		puts("true");
 	else
